@@ -76,3 +76,23 @@ DROP TABLE `Types`
 DROP TABLE `Orders`
 
 ALTER TABLE `Order` RENAME TO `Orders`
+
+SELECT
+    o.id,
+    o.size_id,
+    o.style_id,
+    o.metal_id,
+    o.type_id,
+    m.metal,
+    m.price AS metal_price,
+    st.style,
+    st.price AS style_price,
+    si.carets,
+    si.price AS size_price,
+    t.name,
+    t.multiplier
+FROM `Orders` o
+    LEFT JOIN Metals m ON m.id = o.metal_id
+    LEFT JOIN Styles st ON st.id = o.style_id
+    LEFT JOIN Sizes si ON si.id = o.size_id
+    LEFT JOIN Types t ON t.id = o.type_id
